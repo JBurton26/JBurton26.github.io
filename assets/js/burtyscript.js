@@ -28,8 +28,6 @@ dataLists.then(data=>{
       <header class="major">
         <h3><a href="${item.html_url}" class="link">${item.name}</a></h3>
         <h5>` +
-
-
         `</h5>
 
         <p>${item.description}</p>

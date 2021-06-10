@@ -26,7 +26,7 @@ dataLists.then(data=>{
         <img src="images/pic01.jpg" alt="" />
       </span>
       <header class="major">
-        <h3><a href="landing.html" class="link">${item.name}</a></h3>
+        <h3><a href="${item.html_url}" class="link">${item.name}</a></h3>
         <h5>` +
 
 

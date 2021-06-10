@@ -1,13 +1,25 @@
-function getRepos(url){
-  return fetch(url).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
+function getResp(url){
+  return fetch(url, {
+    headers: {
+      'Accept': 'application/vnd.github.mercy-preview+json'
+    }
+  }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
 }
 
-
-
-var dataLists = getRepos("https://api.github.com/users/JBurton26/repos");
+var dataLists = getResp("https://api.github.com/users/JBurton26/repos");
 dataLists.then(data=>{
   for (const item of data) {
-    console.log(item)
+    //TODO Languages need to be added.
+    var langsList = ""
+    //console.log(item)
+
+    getResp(item.languages_url).then(dlang=>{
+      for (const key in dlang){
+        console.log(key)
+      }
+    });
+
+
     var str = `
     <article>
       <span class="image">
@@ -15,12 +27,17 @@ dataLists.then(data=>{
       </span>
       <header class="major">
         <h3><a href="landing.html" class="link">${item.name}</a></h3>
+        <h5>` +
+
+
+        `</h5>
 
         <p>${item.description}</p>
 
       </header>
     </article>
     `;
+
     document.getElementById("one").innerHTML += (str);
   }
-})
+});

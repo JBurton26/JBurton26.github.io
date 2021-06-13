@@ -6,19 +6,27 @@ function getResp(url){
   }).then(response=>response.json()).then(data=>data).catch(error=>console.log(error));
 }
 
-var dataLists = getResp("https://api.github.com/users/JBurton26/repos");
+var dataLists = getResp("https://api.github.com/users/JBurton26/repos?type=all");
+console.log(dataLists)
 dataLists.then(data=>{
+  if(data.message != null){
+    console.log("null")
+    return
+  }
   for (const item of data) {
     //TODO Languages need to be added.
-    var langsList = ""
+    var langsList = []
     //console.log(item)
 
-    getResp(item.languages_url).then(dlang=>{
+    /*getResp(item.languages_url).then(dlang=>{
       for (const key in dlang){
         console.log(key)
-      }
-    });
+        langsList.push(key)
 
+      }
+      console.log(langsList)
+    });
+    */
 
     var str = `
     <article>
@@ -27,10 +35,8 @@ dataLists.then(data=>{
       </span>
       <header class="major">
         <h3><a href="${item.html_url}" class="link">${item.name}</a></h3>
-        <h5></h5>
-
+        <h5>Main Language: ${item.language}</h5>
         <p>${item.description}</p>
-
       </header>
     </article>
     `;
